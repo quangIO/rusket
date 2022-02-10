@@ -309,11 +309,13 @@ extern "C" {
     pub fn racket_cpointer_offset(cptr: ptr) -> iptr;
 }
 extern "C" {
-    pub fn default_boot(
+    pub fn racket_easy_boot(
         exec_file: *const ::std::os::raw::c_char,
         boot1_path: *const ::std::os::raw::c_char,
         boot2_path: *const ::std::os::raw::c_char,
         boot3_path: *const ::std::os::raw::c_char,
+        collects_dir: *const ::std::os::raw::c_char,
+        config_dir: *const ::std::os::raw::c_char,
     );
 }
 extern "C" {

@@ -1,4 +1,4 @@
-use std::{env, ffi::CString, os::unix::prelude::OsStrExt, path::PathBuf};
+use std::{env, ffi::CString, os::unix::prelude::OsStrExt, path::PathBuf, ptr};
 
 use rustket::bindings;
 
@@ -10,12 +10,15 @@ fn main() {
     let boot3_path = CString::new(lib_path.join("racket.boot").as_os_str().as_bytes()).unwrap();
 
     let image = CString::new("/Users/qt/racket/embed/image.bin").unwrap();
+
     unsafe {
-        bindings::default_boot(
+        bindings::racket_easy_boot(
             exec_file.as_ptr(),
             boot1_path.as_ptr(),
             boot2_path.as_ptr(),
             boot3_path.as_ptr(),
+            ptr::null(),
+            ptr::null()
         );
 
         bindings::run_something(image.as_ptr());
